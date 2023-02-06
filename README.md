@@ -1,4 +1,4 @@
-# UD-Demo-Graph-SPARQL
+# UD-Demo-Workspace-GratteCiel
 
 A demonstration for visualizing RDF semantic graphs alongside 3D City models using:
 * [UD-Viz](https://github.com/VCityTeam/UD-Viz) as a frontend web application for urban data visualization
@@ -15,7 +15,22 @@ A demonstration for visualizing RDF semantic graphs alongside 3D City models usi
 * [Install Docker](https://docs.docker.com/engine/install/)
 * [Install Docker Compose](https://docs.docker.com/compose/install/)
 
+### Repository setup
+To begin create a new Github repository using this template:
+
+![image](https://user-images.githubusercontent.com/23373264/217045942-5f994e2d-431e-4620-bf76-f1cc1f1d7673.png)
+
+Once generated, use the new repository can be cloned:
+```
+git clone [your new repository URL]
+```
+
 ### Component Setup
+To begin, clone the repository:
+```
+git clone https://github.com/VCityTeam/UD-Demo-Workspace-GratteCiel.git
+```
+
 To configure the demo and the components that support it edit the `.env` file to be launched with docker-compose. By default the following ports are used by the following services:
 - 8996: `PostGIS`
 - 8997: `Strabon`
