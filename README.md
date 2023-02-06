@@ -3,8 +3,7 @@
 A demonstration for visualizing RDF semantic graphs alongside 3D City models using:
 * [UD-Viz](https://github.com/VCityTeam/UD-Viz) as a frontend web application for urban data visualization
   * In particular the [SPARQL module](https://github.com/VCityTeam/UD-Viz/tree/master/src/Widgets/Extensions/SPARQL) is used to visualize semantic urban data in the form of RDF
-* [Strabon RDF Store](http://www.strabon.di.uoa.gr/) an RDF-Store for storing and serving geospatial semantic graph data in the form of RDF
-* [PostGIS](https://postgis.net/) a geospatial database extension of [PostgreSQL](https://www.postgresql.org/) used here as a backend database for Strabon
+* [Blazegraph](https://github.com/blazegraph/database/wiki/About_Blazegraph) an RDF-Store for storing and serving geospatial semantic graph data in the form of RDF with a SPARQL API
 
 ### Component Diagram
 ![SPARQL POC Component Diagram](./UD-Demo_SPARQL_POC_Component_Diagram.svg)
@@ -14,33 +13,31 @@ A demonstration for visualizing RDF semantic graphs alongside 3D City models usi
 
 * [Install Docker](https://docs.docker.com/engine/install/)
 * [Install Docker Compose](https://docs.docker.com/compose/install/)
+* [Install Node/npm](https://github.com/VCityTeam/UD-Viz#installing-nodenpm)
 
 ### Component Setup
-To begin, clone the repository:
+To begin, clone and initialize the repository:
 ```
 git clone https://github.com/VCityTeam/UD-Demo-Workspace-GratteCiel.git
+git submodule init      # init UD-Viz
+git submodule update    # update UD-Viz 
 ```
 
+
 To configure the demo and the components that support it edit the `.env` file to be launched with docker-compose. By default the following ports are used by the following services:
-- 8996: `PostGIS`
-- 8997: `Strabon`
+- 8997: `Blazegraph`
 - 8998: `UD-Viz`
 
 The following sections will describe how to configure this file for each component. 
 
-### Build Images and run containers
-First, build the PostGIS, Strabon, and UD-Viz docker images and run their containers:
+### Build run Blazegraph
+First, build the Blazegraph, and UD-Viz docker images and run their containers:
 ```
 docker-compose up
 ```
 
-**Note:** Make sure to set the `sparqlModule/url` port in the `./ud-viz-context/config.json` file to the same port for the _Strabon_ container declared in the `.env` file. If these ports are ever changed after building the images, the _UD-Viz_ image must be rebuilt:
-```
-docker-compose rm udviz
-docker-compose build udviz
-```
-
-### Populate RDF-Store
+**Note:** Make sure to set the `sparqlModule/url` port in the [./ud-viz-context/assets/config.json](./ud-viz-context/assets/config.json) file to the same port for the **Blazegraph** container declared in the `.env` file. 
+### Populate Blazegraph
 To populate the Blazegraph database, open the user inteface in a web browser ([http://localhost:8997/bigdata](http://localhost:8997/bigdata) by default)
 
 Open the UPDATE tab and enter the following query into the textbox:
