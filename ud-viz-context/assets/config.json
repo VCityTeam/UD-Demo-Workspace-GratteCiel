@@ -133,7 +133,7 @@
     }
   },
   "sparqlModule": {
-    "url": "http://localhost:8997/strabon/",
+    "url": "http://localhost:8997/bigdata/",
     "url_parameters": "Query?handle=download&format=SPARQL/JSON&view=HTML&query="
   }
 }

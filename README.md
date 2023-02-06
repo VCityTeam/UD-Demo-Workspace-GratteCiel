@@ -40,11 +40,21 @@ docker-compose rm udviz
 docker-compose build udviz
 ```
 
-### Upload RDF-Store Dataset
-All files in the [data folder](./strabon-context/data) are copied into the Strabon container at `/data`. To upload these files into Strabon to be used by the sparqlModule:
-1. Open a web browser and navigate to `localhost:8997/strabon`
-2. From the left menu, click *Explore/Modify operations* then *Store*
-3. Copy and paste the local path of each file in the data folder as `file:///data/[file to upload]` into the *URI Input* field and click *Store from URI*
-   - ⚠️ You may be asked to enter the Strabon administrative credentials here. However, these credentials currently cannot be changed from the `.env` file. See issue [#1](https://github.com/VCityTeam/UD-Demo-Graph-SPARQL/issues/1).
+### Populate RDF-Store
+To populate the Blazegraph database, open the user inteface in a web browser ([http://localhost:8997/bigdata](http://localhost:8997/bigdata) by default)
 
-Now the demo is ready and can be accessed from `localhost:8998`
+Open the UPDATE tab and enter the following query into the textbox:
+```
+# TBox
+### citygml 3.0 ontologies
+load <https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Ontologies/CityGML/3.0/core.ttl>
+load <https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Ontologies/CityGML/3.0/construction.ttl>
+load <https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Ontologies/CityGML/3.0/building.ttl>
+load <https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Ontologies/CityGML/3.0/versioning.ttl>
+### workspace
+load <https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Ontologies/Workspace/3.0/workspace.ttl>
+load <https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Ontologies/Workspace/3.0/transactiontype.ttl>
+
+# ABox
+load <https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Datasets/GratteCiel_Workspace_2009_2018/3.0/GratteCiel_2009_2018_Workspace.ttl>
+```
