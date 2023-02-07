@@ -1,4 +1,44 @@
 {
-  "url": "http://localhost:8997/strabon/",
-  "url_parameters": "Query?handle=download&format=SPARQL/JSON&view=HTML&query="
+  "height": 500,
+  "width": 500,
+  "fontSize": 4,
+  "url": "https://demo.liris.cnrs.fr/vcity/geodatadays/strabon/",
+  "url_parameters": "Query?handle=download&format=SPARQL/JSON&view=HTML&query=",
+  "queries": [
+    {
+      "title": "Select Buildings from Version (2012)",
+      "formats": {
+        "graph": "Graph",
+        "table": "Table",
+        "json": "JSON"
+      },
+      "filepath": "./assets/queries/version.rq"
+    },
+    {
+      "title": "Select Building by ID",
+      "formats": {
+        "graph": "Graph",
+        "table": "Table",
+        "json": "JSON"
+      },
+      "filepath": "./assets/queries/buildingByIDQuery.rq"
+    },
+    {
+      "title": "Select Slabs from Building",
+      "formats": {
+        "graph": "Graph",
+        "table": "Table",
+        "json": "JSON"
+      },
+      "filepath": "./assets/queries/ifcSlabQuery.rq"
+    },
+    {
+      "title": "Count Slabs in Building",
+      "formats": {
+        "table": "Table",
+        "json": "JSON"
+      },
+      "filepath": "./assets/queries/ifcSlabCountQuery.rq"
+    }
+  ]
 }
