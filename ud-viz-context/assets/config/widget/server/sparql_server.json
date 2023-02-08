@@ -6,39 +6,12 @@
   "url_parameters": "Query?handle=download&format=SPARQL/JSON&view=HTML&query=",
   "queries": [
     {
-      "title": "Select Buildings from Version (2012)",
+      "title": "Show Workspace",
       "formats": {
         "graph": "Graph",
-        "table": "Table",
         "json": "JSON"
       },
       "filepath": "./assets/queries/version.rq"
-    },
-    {
-      "title": "Select Building by ID",
-      "formats": {
-        "graph": "Graph",
-        "table": "Table",
-        "json": "JSON"
-      },
-      "filepath": "./assets/queries/buildingByIDQuery.rq"
-    },
-    {
-      "title": "Select Slabs from Building",
-      "formats": {
-        "graph": "Graph",
-        "table": "Table",
-        "json": "JSON"
-      },
-      "filepath": "./assets/queries/ifcSlabQuery.rq"
-    },
-    {
-      "title": "Count Slabs in Building",
-      "formats": {
-        "table": "Table",
-        "json": "JSON"
-      },
-      "filepath": "./assets/queries/ifcSlabCountQuery.rq"
     }
   ]
 }
