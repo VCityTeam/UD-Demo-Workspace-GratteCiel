@@ -2,7 +2,7 @@
   "height": 500,
   "width": 500,
   "fontSize": 4,
-  "url": "https://demo.liris.cnrs.fr/vcity/geodatadays/strabon/",
+  "url": "localhost:8997/strabon",
   "url_parameters": "Query?handle=download&format=SPARQL/JSON&view=HTML&query=",
   "queries": [
     {
