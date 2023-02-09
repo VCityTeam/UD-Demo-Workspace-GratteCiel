@@ -48,34 +48,26 @@ PREFIX vt2015_2018: <https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontolog
 SELECT DISTINCT ?subject ?subjectType ?predicate ?object ?objectType
 WHERE {
   {
-    ?subject a wksp:Workspace ;
+    ws:scenario_1 wksp:Scenario.versionTransitionMember ?subject .
+    ?subject a vers:VersionTransition ;
+      a ?subjectType ;
+      ( vers:VersionTransition.to|vers:VersionTransition.from ) ?object ;
       ?predicate ?object .
-    ?subject a ?subjectType .
     OPTIONAL {
       ?object a ?objectType .
-    }
+    } 
   } UNION {
-    ?subject a wksp:ConcensusSpace ;
+    ws:scenario_1 wksp:Scenario.versionMember ?subject .
+    ?subject a vers:Version ;
+      a ?subjectType ;
       ?predicate ?object .
-    ?subject a ?subjectType .
     OPTIONAL {
       ?object a ?objectType .
-    }
-  } UNION {
-    ?subject a wksp:PropositionSpace ;
-      ?predicate ?object .
-    ?subject a ?subjectType .
-    OPTIONAL {
-      ?object a ?objectType .
-    }
-  } UNION {
-    ?subject a wksp:Scenario ;
-      ?predicate ?object .
-    ?subject a ?subjectType .
-    OPTIONAL {
-      ?object a ?objectType .
-    }
+    } 
   }
+  FILTER(?predicate != vers:VersionTransition.transaction)
+  FILTER(?subject != owl:NamedIndividual)
+  FILTER(?object != owl:NamedIndividual)
   FILTER(?subjectType != owl:NamedIndividual)
   FILTER(?objectType != owl:NamedIndividual)
 }

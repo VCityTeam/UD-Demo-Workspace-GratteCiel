@@ -1,7 +1,7 @@
 version: '1.0'
-# volumes:
-#   postgres_volume:
-#     name: ${POSTGRES_VOLUME_NAME}
+volumes:
+  postgres_volume:
+    name: ${POSTGRES_VOLUME_NAME}
 services:
 #   blazegraph:
 #     hostname: blazegraph
