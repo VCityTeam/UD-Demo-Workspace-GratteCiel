@@ -71,4 +71,4 @@ To upload files into Strabon to be used by the sparqlModule:
    1. `https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Datasets/GratteCiel_Workspace_2009_2018/3.0/GratteCiel_2015_split.rdf`
    1. `https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Datasets/GratteCiel_Workspace_2009_2018/3.0/GratteCiel_2018_split.rdf`
 
-Now the UD-Viz demo is ready and can be accessed from `localhost:8998`
+Now the UD-Viz demo is ready and can be accessed from `localhost:8000`
