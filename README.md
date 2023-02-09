@@ -20,6 +20,7 @@ A demonstration for visualizing RDF semantic graphs alongside 3D City models usi
 Currently the UD-Viz framework must be initialized after cloning this repository.
 ```
 git clone https://github.com/VCityTeam/UD-Demo-Workspace-GratteCiel.git
+cd UD-Demo-Workspace-GratteCiel
 git submodule init      # init UD-Viz
 git submodule update    # update UD-Viz
 ```
