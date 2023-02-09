@@ -29,20 +29,23 @@ git submodule update    # update UD-Viz
 To configure the demo and the components that support it edit the `.env` file to be launched with docker-compose. By default the following ports are used by the following services:
 - 8996: `PostGIS`
 - 8997: `Strabon`
-- 8998: `UD-Viz`
+- 8000: `UD-Viz`
 
 The following sections will describe how to configure this file for each component. 
 
 ### Build Images and run containers
-First, build the PostGIS, Strabon, and UD-Viz docker images and run their containers:
+First, build the PostGIS and Strabon docker images and run their containers:
 ```
 docker-compose up
 ```
 
-**Note:** Make sure to set the `sparqlModule/url` port in the `./ud-viz-context/config.json` file to the same port for the _Strabon_ container declared in the `.env` file. If these ports are ever changed after building the images, the _UD-Viz_ image must be rebuilt:
+**Note:** Make sure to set the `sparqlModule/url` port in the `./ud-viz-context/config.json` file to the same port for the _Strabon_ container declared in the `.env` file.
+
+Then install and run the UD-Viz application:
 ```
-docker-compose rm udviz
-docker-compose build udviz
+cd ud-viz-context
+npm i
+npm run debug
 ```
 
 ### Upload RDF-Store Dataset
@@ -50,6 +53,12 @@ To upload files into Strabon to be used by the sparqlModule:
 1. Open a web browser and navigate to `localhost:8997/strabon`
 2. From the left menu, click *Explore/Modify operations* then *Store*
 3. Copy and paste the following URLs into the *URI Input* field and click *Store from URI*. ⚠️ Note: You may be asked to enter the Strabon administrative credentials here. However, these credentials currently cannot be changed from the `.env` file. See issue [#1](https://github.com/VCityTeam/UD-Demo-Graph-SPARQL/issues/1).
-   1. 
+   1. `https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Datasets/GratteCiel_Workspace_2009_2018/3.0/GratteCiel_2009_2018_Workspace.rdf`
+   2. `https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Datasets/GratteCiel_Workspace_2009_2018/3.0/Transition_2009_2012.rdf`
+   3. `https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Datasets/GratteCiel_Workspace_2009_2018/3.0/Transition_2012_2015.rdf`
+   4. `https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Datasets/GratteCiel_Workspace_2009_2018/3.0/Transition_2015_2018.rdf`
+   5. `https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Datasets/GratteCiel_Workspace_2009_2018/3.0/Transition_2009_2009b.rdf`
+   6. `https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Datasets/GratteCiel_Workspace_2009_2018/3.0/Transition_2009b_2012b.rdf`
+   7. `https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Datasets/GratteCiel_Workspace_2009_2018/3.0/Transition_2012b_2015.rdf`
 
-Now the demo is ready and can be accessed from `localhost:8998`
+Now the UD-Viz demo is ready and can be accessed from `localhost:8998`
