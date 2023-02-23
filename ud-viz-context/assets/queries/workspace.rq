@@ -75,7 +75,26 @@ WHERE {
     OPTIONAL {
       ?object a ?objectType .
     }
+  } UNION {
+    ?subject a vers:Version ;
+      ?predicate ?object .
+    ?subject a ?subjectType .
+    OPTIONAL {
+      ?object a ?objectType .
+    }
+  } UNION {
+    ?subject a vers:VersionTransition ;
+      ?predicate ?object .
+    ?subject a ?subjectType .
+    OPTIONAL {
+      ?object a ?objectType .
+    }
   }
+  FILTER(?predicate != rdf:type)
+  FILTER(?predicate != vers:Version.versionMember)
+  FILTER(?predicate != vers:VersionTransition.transaction)
+  FILTER(?subject != owl:NamedIndividual)
+  FILTER(?object != owl:NamedIndividual)
   FILTER(?subjectType != owl:NamedIndividual)
   FILTER(?objectType != owl:NamedIndividual)
 }

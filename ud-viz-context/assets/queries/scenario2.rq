@@ -65,7 +65,9 @@ WHERE {
       ?object a ?objectType .
     } 
   }
+  FILTER(?predicate != vers:Version.versionMember)
   FILTER(?predicate != vers:VersionTransition.transaction)
+  FILTER(?predicate != rdf:type)
   FILTER(?subject != owl:NamedIndividual)
   FILTER(?object != owl:NamedIndividual)
   FILTER(?subjectType != owl:NamedIndividual)

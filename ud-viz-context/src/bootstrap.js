@@ -10,9 +10,12 @@ udvizBrowser.FileUtil.loadMultipleJSON([
   '../assets/config/layer/3DTiles.json',
   '../assets/config/layer/base_maps.json',
   '../assets/config/layer/elevation.json',
+  '../assets/config/styles.json',
   '../assets/config/widget/about.json',
   '../assets/config/widget/help.json',
-  '../assets/config/widget/sparql_server.json'
+  '../assets/config/widget/temporal.json',
+  '../assets/config/widget/sparql_widget.json',
+  '../assets/config/server/sparql_server.json'
 ]).then((configs) => {
   // http://proj4js.org/
   // define a projection as a string and reference it that way
@@ -85,12 +88,47 @@ udvizBrowser.FileUtil.loadMultipleJSON([
   );
   app.addWidgetView("layerChoice", layerChoice);
 
-  // //// SPARQL MODULE
-  const sparqlModule = new udvizBrowser.Widget.Server.SparqlModule(
-    configs["sparql_server"],
-    app.getFrame3DPlanar().getLayerManager()
+
+  // //// CITY OBJECTS PROVIDER
+  const cityObjectProvider = new udvizBrowser.Widget.CityObjectProvider(
+    app.getFrame3DPlanar().getLayerManager(),
+    configs['styles']
   );
-  app.addWidgetView("sparqlModule", sparqlModule.view, {
-    name: "Workspaces",
+
+  // //// CITY OBJECTS MODULE
+  const cityObjectModule = new udvizBrowser.Widget.CityObjectModule(
+    cityObjectProvider,
+    configs['styles']
+  );
+  app.addWidgetView('cityObjects', cityObjectModule.view);
+
+  // TEMPORAL MODULES
+  let temporalProviders = [];
+  
+  const temporalModule1 = new udvizBrowser.Widget.TemporalModule(
+    app.getFrame3DPlanar().getLayerManager().tilesManagers[0],
+    configs['temporal']
+  );
+  
+  const temporalModule2 = new udvizBrowser.Widget.TemporalModule(
+    app.getFrame3DPlanar().getLayerManager().tilesManagers[1],
+    configs['temporal']
+  );
+
+  temporalProviders.push(temporalModule1.provider);
+  temporalProviders.push(temporalModule2.provider);
+
+  // //// SPARQL MODULE
+  const sparqlWidgetView = new udvizBrowser.Widget.Server.SparqlWidgetView(
+    new udvizBrowser.Widget.Server.SparqlEndpointResponseProvider(
+      configs['sparql_server']
+    ),
+    cityObjectProvider,
+    temporalProviders,
+    app.getFrame3DPlanar().getLayerManager(),
+    configs['sparql_widget']
+  );
+  app.addWidgetView('sparqlModule', sparqlWidgetView, {
+    name: 'SPARQL Query',
   });
 });
