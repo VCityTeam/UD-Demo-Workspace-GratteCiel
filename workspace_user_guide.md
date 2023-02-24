@@ -3,7 +3,7 @@ This is a user guide for using the Workspace functionality (currently under deve
 
 To open the Widget, click on the SPARQL Query button in the left panel:
 
-![image](https://user-images.githubusercontent.com/23373264/221245183-33a9ada3-ac06-4c10-bb97-a0736e6421fd.png)
+![221245183-33a9ada3-ac06-4c10-bb97-a0736e6421fd](https://user-images.githubusercontent.com/23373264/221245352-7ec094e5-5a81-4a3a-a428-44a31bad0bec.png)
 
 ## Interface
 
