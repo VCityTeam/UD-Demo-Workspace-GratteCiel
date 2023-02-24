@@ -48,6 +48,14 @@ PREFIX vt2015_2018: <https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontolog
 SELECT DISTINCT ?subject ?subjectType ?predicate ?object ?objectType
 WHERE {
   {
+    ?subject a wksp:Scenario ;
+      a ?subjectType ;
+      ?predicate ?object .
+    OPTIONAL {
+      ?object a ?objectType .
+    }
+    FILTER(?subject = ws:scenario_1)
+  } UNION {
     ?subject a vers:VersionTransition ;
       a ?subjectType ;
       ?predicate ?object .
