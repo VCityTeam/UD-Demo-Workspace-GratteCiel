@@ -37,7 +37,7 @@ Clicking on a building node will zoom the camera on the building in the 3D scene
 ![image](https://user-images.githubusercontent.com/23373264/221206638-b2d477d9-650d-47c4-be64-eb809f9538a5.png)
 
 
-Not every query provides enough data to the Workspace or Graph visualizations, and thus some only serve as a visual representation of the data. Here is a list of which queries support the funcionalities described above  :
+Not every query provides enough data to the Workspace or Graph visualizations, for these functionalities to work. Thus some queries only serve as a visual representation of the data. Here is a list of which queries support the funcionalities described above :
 
 | Query                                | Workspace Support (display corresponding Version or Transition) | Graph Support (zoom on building) |
 | ------------------------------------ | --------------------------------------------------------------- | -------------------------------- |
