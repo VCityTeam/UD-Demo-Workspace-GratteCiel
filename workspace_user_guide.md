@@ -21,13 +21,23 @@ This button can toggle whether the text area for the query to be submitted is sh
 Queries are written in [SPARQL](https://www.w3.org/TR/sparql11-query/)
 
 ### Select Result Visualization Format
-Use this dropdown menu to select how the query result will be visualized. Currently 2 modes are presented:
-1. Workspace - clicking on Version or VersionTransition will display the corresponding state of the city objects in 3D scene based on:
-   1. The point in time of the clicked Version or Transition
-   2. The (first) scenario that contains the clicked Version or Transition
-2. Graph - clicking on a building node will zoom the camera on the building in the 3D scene
+Use this dropdown menu to select how the query result will be visualized. Currently 2 modes are presented that enable different functionalities to interact with the 3D scene:
 
-Not every query provides enough data to the Workspace or Graph visualizations, and thus serve only as a visual representation of the data. Here is a list of which queries support the funcionalities described above  :
+#### Workspace
+Clicking on Version or VersionTransition will display the corresponding state of the city objects in 3D scene based on:
+- The point in time of the clicked Version or Transition
+- The (first) scenario that contains the clicked Version or Transition
+
+![image](https://user-images.githubusercontent.com/23373264/221207437-f8345893-7620-4ef3-8941-421f29905546.png)
+
+
+#### Graph
+Clicking on a building node will zoom the camera on the building in the 3D scene
+
+![image](https://user-images.githubusercontent.com/23373264/221206638-b2d477d9-650d-47c4-be64-eb809f9538a5.png)
+
+
+Not every query provides enough data to the Workspace or Graph visualizations, and thus some only serve as a visual representation of the data. Here is a list of which queries support the funcionalities described above  :
 
 | Query                                | Workspace Support (display corresponding Version or Transition) | Graph Support (zoom on building) |
 | ------------------------------------ | --------------------------------------------------------------- | -------------------------------- |
