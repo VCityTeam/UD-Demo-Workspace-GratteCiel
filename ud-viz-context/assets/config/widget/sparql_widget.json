@@ -34,6 +34,14 @@
         "graph": "Graph"
       },
       "filepath": "./assets/queries/scenario2.rq"
+    },
+    {
+      "title": "Show Transition 2009-2012",
+      "formats": {
+        "workspace": "Workspace",
+        "graph": "Graph"
+      },
+      "filepath": "./assets/queries/transition2009-2012.rq"
     }
   ],
   "namespaceLabels": {
