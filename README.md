@@ -6,7 +6,7 @@ A demonstration for visualizing RDF semantic graphs alongside 3D City models usi
 * [Strabon RDF Store](http://www.strabon.di.uoa.gr/) an RDF-Store for storing and serving geospatial semantic graph data in the form of RDF
 * [PostGIS](https://postgis.net/) a geospatial database extension of [PostgreSQL](https://www.postgresql.org/) used here as a backend database for Strabon
 
-![image](https://user-images.githubusercontent.com/23373264/217811394-207d8e56-51e8-4c43-a432-b297f1cf2883.png)
+![image](https://user-images.githubusercontent.com/23373264/221232941-cdb54a4a-8b14-4145-b773-c801b3989c01.png)
 
 ### Component Diagram
 ![SPARQL POC Component Diagram](./UD-Demo_SPARQL_POC_Component_Diagram.svg)
