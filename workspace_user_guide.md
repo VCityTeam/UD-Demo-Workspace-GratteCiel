@@ -35,4 +35,4 @@ Not every query provides enough data to the Workspace or Graph visualizations, a
 | Show Versions and VersionTransitions | 🔴                                                               | 🔴                                |
 | Show Scenario 1                      | 🔴                                                               | 🔴                                |
 | Show Scenario 2                      | 🔴                                                               | 🔴                                |
-| Show Transition 2009-2012            | 🔴                                                               | 🟢                                |
+| Show Transition 2009-2012            | 🟢                                                               | 🟢                                |
