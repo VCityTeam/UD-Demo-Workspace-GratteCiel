@@ -29,9 +29,9 @@ git submodule update    # update UD-Viz
 
 ### Component Setup
 To configure the demo and the components that support it edit the `.env` file to be launched with docker-compose. By default the following ports are used by the following services:
-- 8996: `PostGIS`
-- 8997: `Strabon`
-- 8000: `UD-Viz`
+- 9012: `PostGIS`
+- 9011: `Strabon`
+- 9010: `UD-Viz`
 
 The following sections will describe how to configure this file for each component. 
 
