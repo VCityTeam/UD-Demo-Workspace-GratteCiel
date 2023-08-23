@@ -125,7 +125,7 @@ udvizBrowser.FileUtil.loadMultipleJSON([
   temporalProviders.push(temporalModule2.provider);
 
   // //// SPARQL MODULE
-  const sparqlWidgetView = new udvizBrowser.Widget.Server.SparqlWidgetView(
+  const sparqlWorkspaceWidgetView = new udvizBrowser.Widget.Server.SparqlWorkspaceWidgetView(
     new udvizBrowser.Widget.Server.SparqlEndpointResponseProvider(
       configs['sparql_server']
     ),
@@ -134,7 +134,7 @@ udvizBrowser.FileUtil.loadMultipleJSON([
     app.getFrame3DPlanar().getLayerManager(),
     configs['sparql_widget']
   );
-  app.addWidgetView('sparqlModule', sparqlWidgetView, {
+  app.addWidgetView('sparqlModule', sparqlWorkspaceWidgetView, {
     name: 'SPARQL Query',
   });
 });

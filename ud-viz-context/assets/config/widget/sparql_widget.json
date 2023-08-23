@@ -6,7 +6,6 @@
     {
       "title": "Show Full Workspace",
       "formats": {
-        "workspace": "Workspace",
         "graph": "Graph"
       },
       "filepath": "./assets/queries/workspace.rq"
@@ -14,7 +13,6 @@
     {
       "title": "Show Versions and VersionTransitions",
       "formats": {
-        "workspace": "Workspace",
         "graph": "Graph"
       },
       "filepath": "./assets/queries/scenarios.rq"
@@ -22,7 +20,6 @@
     {
       "title": "Show Scenario 1",
       "formats": {
-        "workspace": "Workspace",
         "graph": "Graph"
       },
       "filepath": "./assets/queries/scenario1.rq"
@@ -30,7 +27,6 @@
     {
       "title": "Show Scenario 2",
       "formats": {
-        "workspace": "Workspace",
         "graph": "Graph"
       },
       "filepath": "./assets/queries/scenario2.rq"
@@ -38,7 +34,6 @@
     {
       "title": "Show Transition 2009-2012",
       "formats": {
-        "workspace": "Workspace",
         "graph": "Graph"
       },
       "filepath": "./assets/queries/transition2009-2012.rq"
