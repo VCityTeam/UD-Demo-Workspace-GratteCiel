@@ -52,7 +52,7 @@ npm run debug
 
 ### Upload RDF-Store Dataset
 To upload files into Strabon to be used by the sparqlModule:
-1. Open a web browser and navigate to `localhost:8997/strabon`
+1. Open a web browser and navigate to `localhost:9011/strabon`
 2. From the left menu, click *Explore/Modify operations* then *Store*
 3. Copy and paste the following URLs into the *URI Input* field and click *Store from URI*. ⚠️ Note: You may be asked to enter the Strabon administrative credentials here. However, these credentials currently cannot be changed from the `.env` file. See issue [#1](https://github.com/VCityTeam/UD-Demo-Graph-SPARQL/issues/1).
    1. `https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Datasets/GratteCiel_Workspace_2009_2018/3.0/GratteCiel_2009_2018_Workspace.rdf`
