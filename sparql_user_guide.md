@@ -13,7 +13,7 @@ To open the Widget, click on the SPARQL Query button in the left panel:
 
 ### Select Query
 Use this dropdown menu to load one of several prewritten queries to vizualize urban data in UD-Viz. This demo features 5 queries:
-1. **Select a buildings and its details from 2015:** Select a specific building building from 2015 and visualize all of the related data points. Clicking on the node with the same color as the `citygml-bldg:Building` entry in the legend will zoom in on the specified building.
+1. **Select a buildings and its details from 2015:** Select a specific building from 2015 and visualize all related data points. Clicking on the node with the same color as the `citygml-bldg:Building` entry in the legend will zoom in on the specified building.
 2. **Count the number of buildings in each year:** Count the number of buildings in each year from the dataset.
 3. **Select All buildings from Gratte-Ciel 2015 (warning big query!):** Visualize the graph of the Gratte-Ciel dataset from 2015. Many of these nodes represent buildings and clicking on any building node will zoom in on the building in the 3D scene.
 4. **Select 30 buildings from Gratte-Ciel 2009:** Select 30 random buildings from the Gratte Ciel dataset in 2009.
