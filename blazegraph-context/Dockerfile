@@ -1,7 +1,7 @@
 FROM openjdk:8-alpine
 
-LABEL maintainer="jey.puget@liris.cnrs.fr, diego.vinasco-alvarez@liris.cnrs.fr"
-LABEL authors="balhoff@renci.org, jey.puget@liris.cnrs.fr, diego.vinasco-alvarez@liris.cnrs.fr"
+LABEL maintainer="jey.puget-gil@liris.cnrs.fr, diego.vinasco-alvarez@liris.cnrs.fr"
+LABEL authors="balhoff@renci.org, jey.puget-gil@liris.cnrs.fr, diego.vinasco-alvarez@liris.cnrs.fr"
 
 
 # use --env on the docker run command line to override
