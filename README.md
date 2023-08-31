@@ -29,9 +29,8 @@ git submodule update    # update UD-Viz
 
 ### Component Setup
 To configure the demo and the components that support it edit the `.env` file to be launched with docker-compose. By default the following ports are used by the following services:
-- 9012: `PostGIS`
-- 9011: `Strabon`
 - 9010: `UD-Viz`
+- 9013: `Blazegraph`
 
 The following sections will describe how to configure this file for each component. 
 
@@ -52,7 +51,7 @@ npm run debug
 
 ### Upload RDF-Store Dataset
 To upload files into Strabon to be used by the sparqlModule:
-1. Open a web browser and navigate to `localhost:8997/strabon`
+1. Open a web browser and navigate to `localhost:9013/blazegraph`
 2. From the left menu, click *Explore/Modify operations* then *Store*
 3. Copy and paste the following URLs into the *URI Input* field and click *Store from URI*. ⚠️ Note: You may be asked to enter the Strabon administrative credentials here. However, these credentials currently cannot be changed from the `.env` file. See issue [#1](https://github.com/VCityTeam/UD-Demo-Graph-SPARQL/issues/1).
    1. `https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Datasets/GratteCiel_Workspace_2009_2018/3.0/GratteCiel_2009_2018_Workspace.rdf`
@@ -71,4 +70,4 @@ To upload files into Strabon to be used by the sparqlModule:
    1. `https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Datasets/GratteCiel_Workspace_2009_2018/3.0/GratteCiel_2015_split.rdf`
    1. `https://dataset-dl.liris.cnrs.fr/rdf-owl-urban-data-ontologies/Datasets/GratteCiel_Workspace_2009_2018/3.0/GratteCiel_2018_split.rdf`
 
-Now the UD-Viz demo is ready and can be accessed from `localhost:8000`
+Now the UD-Viz demo is ready and can be accessed from `localhost:9010`
