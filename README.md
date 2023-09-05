@@ -38,7 +38,7 @@ First, build the Blazegraph docker image and run its container:
 docker compose up
 ```
 
-**Note:** Make sure to set the `sparqlModule/url` port in the `./ud-viz-context/config.json` file to the same port for the _Strabon_ container declared in the `.env` file.
+**Note:** Make sure to set the `sparqlModule/url` port in the `./ud-viz-context/config.json` file to the same value as the `BLAZEGRAPH_PORT` variable declared in the `.env` file.
 
 Then install and run the UD-Viz application:
 ```
