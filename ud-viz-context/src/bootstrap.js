@@ -88,6 +88,12 @@ udvizBrowser.FileUtil.loadMultipleJSON([
   );
   app.addWidgetView("layerChoice", layerChoice);
 
+  // //// CITY OBJECTS PROVIDER
+  const cityObjectProvider = new udvizBrowser.Widget.CityObjectProvider(
+    app.getFrame3DPlanar().getLayerManager(),
+    configs['styles']
+  );
+
 
   // //// CITY OBJECTS PROVIDER
   const cityObjectProvider = new udvizBrowser.Widget.CityObjectProvider(
