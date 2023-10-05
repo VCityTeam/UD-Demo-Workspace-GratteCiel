@@ -28,7 +28,7 @@ git submodule update    # update UD-Viz
 ```
 
 ### Component Setup
-To configure the demo and the components that support it edit the `.env` file to be launched with docker-compose. By default the following ports are used by the following services:
+To configure the demo and the components that support it edit the `.env` file to be launched with docker-compose. By default, the following ports are used by the following services:
 - 9012: `PostGIS`
 - 9011: `Strabon`
 - 9010: `UD-Viz`
