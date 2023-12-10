@@ -186,4 +186,16 @@ udvizBrowser
       }
     }
   );
+
+  // Create div to integrate logo image
+  const logoDiv = document.createElement('div');
+  frame3DPlanar.domElementUI.appendChild(
+    logoDiv
+  );
+  logoDiv.id = 'logo-div';
+  const img = document.createElement('img');
+  logoDiv.appendChild(img);
+  img.src = './assets/img/logo/logo-liris.png';
+  img.classList.add('logos');
+
 });
