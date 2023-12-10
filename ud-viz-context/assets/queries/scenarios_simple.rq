@@ -15,6 +15,7 @@ WHERE {
       ?predicate ?object .
     OPTIONAL {
       ?object a ?objectType .
+      FILTER(?objectType != owl:NamedIndividual)
     } 
   
   FILTER(?predicate != vers:Version.versionMember)
@@ -23,5 +24,4 @@ WHERE {
   FILTER(?subject != owl:NamedIndividual)
   FILTER(?object != owl:NamedIndividual)
   FILTER(?subjectType != owl:NamedIndividual)
-  FILTER(?objectType != owl:NamedIndividual)
 }

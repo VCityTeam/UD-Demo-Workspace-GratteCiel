@@ -50,10 +50,10 @@ WHERE {
   {
     ?subject a vers:VersionTransition ;
       a ?subjectType ;
-      ( vers:VersionTransition.to|vers:VersionTransition.from ) ?object ;
       ?predicate ?object .
     OPTIONAL {
       ?object a ?objectType .
+      FILTER(?objectType != owl:NamedIndividual)
     } 
   } UNION {
     ?subject a vers:Version ;
@@ -61,6 +61,7 @@ WHERE {
       ?predicate ?object .
     OPTIONAL {
       ?object a ?objectType .
+      FILTER(?objectType != owl:NamedIndividual)
     } 
   }
   FILTER(?predicate != vers:Version.versionMember)
@@ -69,5 +70,4 @@ WHERE {
   FILTER(?subject != owl:NamedIndividual)
   FILTER(?object != owl:NamedIndividual)
   FILTER(?subjectType != owl:NamedIndividual)
-  FILTER(?objectType != owl:NamedIndividual)
 }

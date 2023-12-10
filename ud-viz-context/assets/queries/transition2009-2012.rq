@@ -53,6 +53,7 @@ WHERE {
       ?predicate ?object .
     OPTIONAL {
       ?object a ?objectType .
+      FILTER(?objectType != owl:NamedIndividual)
     }
     FILTER(?subject = ws:scenario_1)
   } UNION {
@@ -61,6 +62,7 @@ WHERE {
       ?predicate ?object .
     OPTIONAL {
       ?object a ?objectType .
+      FILTER(?objectType != owl:NamedIndividual)
     }
     FILTER(?subject = vt2009_2012:versionTransition_2009_2012)
   } UNION {
@@ -69,6 +71,7 @@ WHERE {
       ?predicate ?object .
     OPTIONAL {
       ?object a ?objectType .
+      FILTER(?objectType != owl:NamedIndividual)
     }
     FILTER(?subject = v2009:version_2009 || ?subject = v2012:version_2012)
   } UNION {
@@ -78,11 +81,11 @@ WHERE {
       ?predicate ?object .
     OPTIONAL {
       ?object a ?objectType .
+      FILTER(?objectType != owl:NamedIndividual)
     }
   }
   FILTER(?predicate != rdf:type)
   FILTER(?subject != owl:NamedIndividual)
   FILTER(?object != owl:NamedIndividual)
   FILTER(?subjectType != owl:NamedIndividual)
-  FILTER(?objectType != owl:NamedIndividual)
 }
