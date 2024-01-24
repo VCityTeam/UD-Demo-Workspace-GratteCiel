@@ -102,7 +102,7 @@ button, input, select {
 }
 
 .logos {
-  height: 40px;
+  height: 60px;
   opacity: 1;
   margin: 5px 10px 5px 5px;
 }
@@ -112,8 +112,8 @@ button, input, select {
   display: flex;
   padding: 4px;
   border-radius: 8px;
-  bottom: 6px;
-  right: 6px;
+  bottom: 20px;
+  right: 20px;
   background-color: #8a8e9163;
   align-items: center;
   z-index: 5;
