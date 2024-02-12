@@ -21,8 +21,6 @@ Currently, the UD-Viz framework must be initialized after cloning this repositor
 ```
 git clone https://github.com/VCityTeam/UD-Demo-Workspace-GratteCiel.git
 cd UD-Demo-Workspace-GratteCiel
-git submodule init      # init UD-Viz
-git submodule update    # update UD-Viz
 ```
 
 ### Component Setup
@@ -44,7 +42,7 @@ Then install and run the UD-Viz application:
 ```
 cd ud-viz-context
 npm i
-npm run debug
+npm run start
 ```
 
 ### Upload RDF-Store Dataset

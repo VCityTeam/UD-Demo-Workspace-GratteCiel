@@ -1,201 +1,210 @@
 /** @format */
 
-import * as udvizBrowser from "@ud-viz/browser";
+import { SparqlEndpointResponseProvider } from "@ud-viz/widget_sparql";
+import { SparqlWorkspaceQueryWindow } from "@ud-viz/widget_workspace";
+import {
+  loadMultipleJSON,
+  initScene,
+  getUriLocalname,
+  loadingScreen
+} from "@ud-viz/utils_browser";
+import * as extension3DTilesTemporal from "@ud-viz/extensions_3d_tiles_temporal";
+import * as proj4 from "proj4";
+import * as itowns from "itowns";
 /* eslint-disable no-new */
 
-// there has to be a better way to do this...
-var element = document.createElement('link');
-element.setAttribute('rel', 'stylesheet');
-element.setAttribute('type', 'text/css');
-element.setAttribute('href', './assets/css/SparqlQueryWindow.css');
-document.getElementsByTagName('head')[0].appendChild(element);
+loadMultipleJSON([
+  "./assets/config/crs.json",
+  "./assets/config/extents.json",
+  "./assets/config/layer/3DTiles.json",
+  "./assets/config/layer/base_maps.json",
+  "./assets/config/layer/elevation.json",
+  "./assets/config/widget/workspace_widget.json",
+  "./assets/config/server/workspace_server.json",
+]).then((configs) => {
+  proj4.default.defs(configs["crs"][0].name, configs["crs"][0].transform);
 
-udvizBrowser
-.loadMultipleJSON([
-  './assets/config/crs.json',
-  './assets/config/extent_lyon.json',
-  './assets/config/frame3D_planars.json',
-  './assets/config/layer/3DTiles.json',
-  './assets/config/layer/base_maps.json',
-  './assets/config/layer/elevation.json',
-  './assets/config/widget/sparql_widget.json',
-  './assets/config/server/sparql_server.json',
-])
-.then((configs) => {
-  udvizBrowser.proj4.default.defs(
-    configs['crs'][0].name,
-    configs['crs'][0].transform
+  const extent = new itowns.Extent(
+    configs["extents"].name,
+    parseInt(configs["extents"].west),
+    parseInt(configs["extents"].east),
+    parseInt(configs["extents"].south),
+    parseInt(configs["extents"].north)
   );
 
-  const extent = new udvizBrowser.itowns.Extent(
-    configs['extent_lyon'][0].name,
-    parseInt(configs['extent_lyon'][0].west),
-    parseInt(configs['extent_lyon'][0].east),
-    parseInt(configs['extent_lyon'][0].south),
-    parseInt(configs['extent_lyon'][0].north)
-  );
+  // create a itowns planar view
+  const viewDomElement = document.createElement("div");
+  viewDomElement.classList.add("full_screen");
+  document.body.appendChild(viewDomElement);
+  const view = new itowns.PlanarView(viewDomElement, extent);
 
-  const frame3DPlanar = new udvizBrowser.Frame3DPlanar(
-    extent,
-    configs['frame3D_planars'][3]
-  );
+  // eslint-disable-next-line no-constant-condition
+  if ("RUN_MODE" == "production")
+    loadingScreen(view, ["UD-VIZ", "UDVIZ_VERSION"]);
 
-  // /// ADD LAYERS
-  udvizBrowser.Widget.Temporal.add3DTilesTemporalFromConfig(
-    configs['3DTiles'],
-    frame3DPlanar.itownsView
-  );
+  // init scene 3D
+  initScene(view.camera.camera3D, view.mainLoop.gfxEngine.renderer, view.scene);
 
-  frame3DPlanar.itownsView.addLayer(
-    new udvizBrowser.itowns.ColorLayer(
-      configs['base_maps'][0]['layer_name'],
+  // add a 3DTiles temporal layer
+
+  const extensions = new itowns.C3DTExtensions();
+  extensions.registerExtension(extension3DTilesTemporal.ID, {
+    [itowns.C3DTilesTypes.batchtable]:
+      extension3DTilesTemporal.C3DTTemporalBatchTable,
+    [itowns.C3DTilesTypes.boundingVolume]:
+      extension3DTilesTemporal.C3DTTemporalBoundingVolume,
+    [itowns.C3DTilesTypes.tileset]:
+      extension3DTilesTemporal.C3DTTemporalTileset,
+  });
+
+  configs["3DTiles"].forEach((layerConfig) => {
+    const c3DTilesLayer = new itowns.C3DTilesLayer(
+      layerConfig.id,
       {
-        updateStrategy: {
-          type: udvizBrowser.itowns.STRATEGY_DICHOTOMY,
-          options: {},
-        },
-        source: new udvizBrowser.itowns.WMSSource({
-          extent: extent,
-          name: configs['base_maps'][0]['name'],
-          url: configs['base_maps'][0]['url'],
-          version: configs['base_maps'][0]['version'],
-          crs: extent.crs,
-          format: configs['base_maps'][0]['format'],
+        name: layerConfig.id,
+        source: new itowns.C3DTilesSource({
+          url: layerConfig.url,
         }),
-        transparent: true,
-      }
-    )
+        registeredExtensions: extensions,
+      },
+      view
+    );
+
+    itowns.View.prototype.addLayer.call(view, c3DTilesLayer);
+  });
+
+  view.addLayer(
+    new itowns.ColorLayer(configs["base_maps"][0]["name"], {
+      updateStrategy: {
+        type: itowns.STRATEGY_DICHOTOMY,
+        options: {},
+      },
+      source: new itowns.WMSSource({
+        extent: extent,
+        name: configs["base_maps"][0]["source"]["name"],
+        url: configs["base_maps"][0]["source"]["url"],
+        version: configs["base_maps"][0]["source"]["version"],
+        crs: extent.crs,
+        format: configs["base_maps"][0]["source"]["format"],
+      }),
+      transparent: true,
+    })
   );
 
   const isTextureFormat =
-    configs['elevation']['format'] == 'image/jpeg' ||
-    configs['elevation']['format'] == 'image/png';
-  frame3DPlanar.itownsView.addLayer(
-    new udvizBrowser.itowns.ElevationLayer(
-      configs['elevation']['layer_name'],
-      {
-        useColorTextureElevation: isTextureFormat,
-        colorTextureElevationMinZ: isTextureFormat
-          ? configs['elevation']['colorTextureElevationMinZ']
-          : null,
-        colorTextureElevationMaxZ: isTextureFormat
-          ? configs['elevation']['colorTextureElevationMaxZ']
-          : null,
-        source: new udvizBrowser.itowns.WMSSource({
-          extent: extent,
-          url: configs['elevation']['url'],
-          name: configs['elevation']['name'],
-          crs: extent.crs,
-          heightMapWidth: 256,
-          format: configs['elevation']['format'],
-        }),
-      }
-    )
+    configs["elevation"]["format"] == "image/jpeg" ||
+    configs["elevation"]["format"] == "image/png";
+  view.addLayer(
+    new itowns.ElevationLayer(configs["elevation"]["layer_name"], {
+      useColorTextureElevation: isTextureFormat,
+      colorTextureElevationMinZ: isTextureFormat
+        ? configs["elevation"]["colorTextureElevationMinZ"]
+        : null,
+      colorTextureElevationMaxZ: isTextureFormat
+        ? configs["elevation"]["colorTextureElevationMaxZ"]
+        : null,
+      source: new itowns.WMSSource({
+        extent: extent,
+        url: configs["elevation"]["url"],
+        name: configs["elevation"]["name"],
+        crs: extent.crs,
+        heightMapWidth: 256,
+        format: configs["elevation"]["format"],
+      }),
+    })
   );
 
   // //// SPARQL Workspace widget
   const temporalWrappers = new Map();
-  frame3DPlanar.itownsView
+  view
     .getLayers()
     .filter(
       (el) =>
         el.isC3DTilesLayer &&
         el.registeredExtensions.isExtensionRegistered(
-          '3DTILES_temporal'
+          extension3DTilesTemporal.ID
         )
     )
     .forEach((layer) => {
       temporalWrappers.set(
         layer.id,
-        new udvizBrowser.Widget.Temporal.Temporal3DTilesLayerWrapper(
-          layer
-        )
+        new extension3DTilesTemporal.Temporal3DTilesLayerWrapper(layer)
       );
     });
 
-  const sparqlWorkspaceWidgetView =
-    new udvizBrowser.Widget.Server.SparqlWorkspaceQueryWindow(
-      new udvizBrowser.Widget.Server.SparqlEndpointResponseProvider(
-        configs['sparql_server']
-      ),
-      configs['sparql_widget']
-    );
-
-  sparqlWorkspaceWidgetView.domElement.id = '_window_sparqlQueryWindow';
-  sparqlWorkspaceWidgetView.dataView.id = '_window_sparqlQueryWindow_data_view';
-
-  frame3DPlanar.domElementUI.appendChild(
-    sparqlWorkspaceWidgetView.domElement
+  const sparqlWorkspaceWidgetView = new SparqlWorkspaceQueryWindow(
+    new SparqlEndpointResponseProvider(configs["workspace_server"]),
+    configs["workspace_widget"]
   );
+
+  sparqlWorkspaceWidgetView.domElement.classList.add("widget_workspace");
+  sparqlWorkspaceWidgetView.dataView.classList.add("data_view");
+  sparqlWorkspaceWidgetView.table.filterSelect.classList.add("table_filter");
+
+  // Add UI
+  const uiDomElement = document.createElement("div");
+  uiDomElement.classList.add("full_screen");
+  document.body.appendChild(uiDomElement);
+  uiDomElement.appendChild(sparqlWorkspaceWidgetView.domElement);
 
   // Add listeners for D3Canvas node events. Three events are possible 'click', 'mouseover', and 'mouseout'
-  sparqlWorkspaceWidgetView.d3Graph.addEventListener(
-    'click',
-    (event) => {
-      // Get clicked node's data, if nodeData.type is 'Version' or 'VersionTransition', select the appropriate
-      // temporalwrapper that contains the 3DTiles representation of the version or transition,
-      // then set the time of the temporal wrapper to visualize the 3DTiles representation of the version or transition.
-      const nodeData =
-        sparqlWorkspaceWidgetView.d3Graph.data.getNodeByIndex(
-          event.datum.index
+  sparqlWorkspaceWidgetView.d3Graph.addEventListener("click", (event) => {
+    // Get clicked node's data, if nodeData.type is 'Version' or 'VersionTransition', select the appropriate
+    // temporalwrapper that contains the 3DTiles representation of the version or transition,
+    // then set the time of the temporal wrapper to visualize the 3DTiles representation of the version or transition.
+    const nodeData = sparqlWorkspaceWidgetView.d3Graph.data.getNodeByIndex(
+      event.datum.index
+    );
+    const nodeType = getUriLocalname(nodeData.type);
+    if (nodeType == "Version" || nodeType == "VersionTransition") {
+      /* find the first scenario that contains the clicked node,
+       * find the temporal the geometry layer with the same name, and
+       * set the current time to the averaged timestamps linked to the node
+       */
+      const scenarioLayerName =
+        sparqlWorkspaceWidgetView.getScenarioLayerNameByIndex(
+          event.datum.index,
+          view
         );
-      const nodeType = udvizBrowser.getUriLocalname(nodeData.type);
-      if (nodeType == 'Version' || nodeType == 'VersionTransition') {
-        /* find the first scenario that contains the clicked node,
-         * find the temporal the geometry layer with the same name, and
-         * set the current time to the averaged timestamps linked to the node
-         */
-        const scenarioLayerName =
-          sparqlWorkspaceWidgetView.getScenarioLayerNameByIndex(
-            event.datum.index,
-            frame3DPlanar.itownsView
-          );
-        const scenarioLayer = frame3DPlanar.itownsView
+      const scenarioLayer = view
+        .getLayers()
+        .filter((el) => el.isC3DTilesLayer)
+        .find((layer) => {
+          return layer.name == scenarioLayerName;
+        });
+
+      console.debug(scenarioLayer);
+
+      // if a layer is found, make sure it is visible and hide all other layers
+      if (scenarioLayer) {
+        view
           .getLayers()
           .filter((el) => el.isC3DTilesLayer)
-          .find((layer) => {
-            return layer.name == scenarioLayerName;
-          });
+          .forEach((layer) => (layer.visible = layer == scenarioLayer));
 
-        console.debug(scenarioLayer);
+        // Calculate the average timestamp of the clicked node
+        const timestamps =
+          sparqlWorkspaceWidgetView.getBitemporalTimestampsByIndex(
+            event.datum.index
+          );
+        const timestampAverage =
+          (timestamps.validTo - timestamps.validFrom) / 2 +
+          timestamps.validFrom;
 
-        // if a layer is found, make sure it is visible and hide all other layers
-        if (scenarioLayer) {
-          frame3DPlanar.itownsView
-            .getLayers()
-            .filter((el) => el.isC3DTilesLayer)
-            .forEach(
-              (layer) => (layer.visible = layer == scenarioLayer)
-            );
+        // set style temporal layer with the date
+        temporalWrappers.get(scenarioLayer.id).styleDate = timestampAverage;
 
-          // Calculate the average timestamp of the clicked node
-          const timestamps =
-            sparqlWorkspaceWidgetView.getBitemporalTimestampsByIndex(
-              event.datum.index
-            );
-          const timestampAverage =
-            (timestamps.validTo - timestamps.validFrom) / 2 +
-            timestamps.validFrom;
-
-          // set style temporal layer with the date
-          temporalWrappers.get(scenarioLayer.id).styleDate =
-            timestampAverage;
-
-          frame3DPlanar.itownsView.notifyChange();
-        }
+        view.notifyChange();
       }
     }
-  );
-
+  });
+  
   // Create div to integrate logo image
   const logoDiv = document.createElement('div');
-  frame3DPlanar.domElementUI.appendChild(
-    logoDiv
-  );
+  document.body.appendChild(logoDiv);
   logoDiv.id = 'logo-div';
   const img = document.createElement('img');
   logoDiv.appendChild(img);
   img.src = './assets/img/logo/logo-liris.png';
   img.classList.add('logos');
-
 });
