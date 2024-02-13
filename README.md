@@ -38,8 +38,6 @@ Then build the Blazegraph docker image and run its container:
 docker compose up
 ```
 
-
-
 ### Upload RDF-Store Dataset
 To upload files into the RDF-store to be used by the sparqlModule:
 1. Open a web browser and navigate to [localhost:9011/blazegraph](http://localhost:9011/blazegraph)
