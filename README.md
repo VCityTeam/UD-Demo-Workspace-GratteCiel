@@ -41,7 +41,7 @@ docker compose up
 ### Upload RDF-Store Dataset
 To upload files into the RDF-store to be used by the sparqlModule run the [./loadData.sh](./loadData.sh) script with the blazegraph port as a parameter: 
 ```bash
-./loadData.sh 9011
+./loadData.sh 9011 > log.html
 ```
 
 Now the UD-Viz demo is ready and can be accessed from [localhost:9010](http://localhost:9010)
