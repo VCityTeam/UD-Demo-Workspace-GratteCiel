@@ -26,28 +26,23 @@ cd UD-Demo-Workspace-GratteCiel
 ### Component Setup
 To configure the demo and the components that support it edit the `.env` file to be launched with docker-compose. By default, the following ports are used by the following services:
 - 9010: `UD-Viz`
-- 9013: `Blazegraph`
+- 9011: `Blazegraph`
 
 The following sections will describe how to configure this file for each component. 
 
 ### Build Images and run containers
-First, build the Blazegraph docker image and run its container:
+First, make sure to set the `sparqlModule/url` port in the [./ud-viz-context/assets/config/server/workspace_server.json file](./ud-viz-context/assets/config/server/workspace_server.json) to the same value as the `BLAZEGRAPH_PORT` variable declared in the [.env](./.env) file.
+
+Then build the Blazegraph docker image and run its container:
 ```
 docker compose up
 ```
 
-**Note:** Make sure to set the `sparqlModule/url` port in the `./ud-viz-context/config.json` file to the same value as the `BLAZEGRAPH_PORT` variable declared in the `.env` file.
 
-Then install and run the UD-Viz application:
-```
-cd ud-viz-context
-npm i
-npm run start
-```
 
 ### Upload RDF-Store Dataset
 To upload files into the RDF-store to be used by the sparqlModule:
-1. Open a web browser and navigate to [localhost:9013/blazegraph](http://localhost:9013/blazegraph)
+1. Open a web browser and navigate to [localhost:9011/blazegraph](http://localhost:9011/blazegraph)
 2. Click on the *UPDATE* tab
 3. Set the *Type* dropdown to "File path or URL"
 4. Copy and paste the following URLs into the text field, and click *Update*.

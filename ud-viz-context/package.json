@@ -6,9 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx webpack --config webpack.config.js",
-    "start": "npm run build && node ./bin/server.js",
+    "serve": "node ./bin/server.js",
+    "start": "npm run build && npm run serve",
     "clean": "npm cache clean --force && rm -fr node_modules && rm package-lock.json",
-    "reset": "npm run clean && npm i --force"
+    "reset": "npm run clean && npm i"
   },
   "keywords": [],
   "author": "",
