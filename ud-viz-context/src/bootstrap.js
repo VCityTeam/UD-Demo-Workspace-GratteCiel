@@ -6,7 +6,6 @@ import {
   loadMultipleJSON,
   initScene,
   getUriLocalname,
-  loadingScreen
 } from "@ud-viz/utils_browser";
 import * as extension3DTilesTemporal from "@ud-viz/extensions_3d_tiles_temporal";
 import * as proj4 from "proj4";
@@ -16,6 +15,7 @@ import * as itowns from "itowns";
 loadMultipleJSON([
   "./assets/config/crs.json",
   "./assets/config/extents.json",
+  "./assets/config/camera.json",
   "./assets/config/layer/3DTiles.json",
   "./assets/config/layer/base_maps.json",
   "./assets/config/layer/elevation.json",
@@ -36,11 +36,22 @@ loadMultipleJSON([
   const viewDomElement = document.createElement("div");
   viewDomElement.classList.add("full_screen");
   document.body.appendChild(viewDomElement);
-  const view = new itowns.PlanarView(viewDomElement, extent);
+  const placement = {
+    coord: new itowns.Coordinates(
+      configs["camera"]["crs"],
+      configs["camera"]["coords"][0],
+      configs["camera"]["coords"][1],
+      configs["camera"]["coords"][2]
+    ),
+    range: configs["camera"]["range"],
+    heading: configs["camera"]["heading"],
+    tilt: configs["camera"]["tilt"]
+  };
+  const view = new itowns.PlanarView(viewDomElement, extent, {
+    placement: placement,
+  });
 
-  // eslint-disable-next-line no-constant-condition
-  if ("RUN_MODE" == "production")
-    loadingScreen(view, ["UD-VIZ", "UDVIZ_VERSION"]);
+  loadingScreen(view, ["UD-VIZ", "4.0.3"]);
 
   // init scene 3D
   initScene(view.camera.camera3D, view.mainLoop.gfxEngine.renderer, view.scene);
@@ -198,13 +209,70 @@ loadMultipleJSON([
       }
     }
   });
-  
+
   // Create div to integrate logo image
-  const logoDiv = document.createElement('div');
+  const logoDiv = document.createElement("div");
   document.body.appendChild(logoDiv);
-  logoDiv.id = 'logo-div';
-  const img = document.createElement('img');
+  logoDiv.id = "logo-div";
+  const img = document.createElement("img");
   logoDiv.appendChild(img);
-  img.src = './assets/img/logo/logo-liris.png';
-  img.classList.add('logos');
+  img.src = "./assets/img/logo/logo-liris.png";
+  img.classList.add("logos");
 });
+
+/**
+ *
+ * Add a loading screen which add itself to document.body then remove it self when view layer initialize event it fires
+ *
+ * @param {itowns.PlanarView} view - itowns view
+ * @param {Array<string>} labels - array of label to display
+ */
+// eslint-disable-next-line no-unused-vars
+const loadingScreen = function (view, labels) {
+  const root = document.createElement("div");
+  root.classList.add("loading_screen");
+  document.body.appendChild(root);
+
+  const characterContainer = document.createElement("div");
+  characterContainer.classList.add("loading_screen_character_container");
+  root.appendChild(characterContainer);
+
+  const characterArray = [];
+  const spaceTag = "space_tag";
+  labels.forEach((label) => {
+    characterArray.push(...label.split(""));
+    characterArray.push(spaceTag); // <== add space between label
+  });
+
+  const offsetAnimation = 0.05;
+  characterArray.forEach((character, index) => {
+    const el = document.createElement("div");
+    el.classList.add("loading_screen_character");
+    if (character == spaceTag) {
+      el.style.width = "30px";
+    } else {
+      el.innerText = character;
+    }
+    el.style.animationDelay = offsetAnimation * index + "s";
+    characterContainer.appendChild(el);
+  });
+
+  const removeLoadingScreen = () => {
+    if (root.parentElement) {
+      root.style.opacity = 0;
+      root.addEventListener("transitionend", () => root.remove());
+    }
+    view.removeEventListener(
+      itowns.VIEW_EVENTS.LAYERS_INITIALIZED,
+      removeLoadingScreen
+    );
+  };
+
+  view.addEventListener(
+    itowns.VIEW_EVENTS.LAYERS_INITIALIZED,
+    removeLoadingScreen
+  );
+
+  const timeout = 5000;
+  setTimeout(removeLoadingScreen, timeout);
+};
