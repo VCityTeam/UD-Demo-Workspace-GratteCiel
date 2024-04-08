@@ -45,7 +45,7 @@ loadMultipleJSON([
     ),
     range: configs["camera"]["range"],
     heading: configs["camera"]["heading"],
-    tilt: configs["camera"]["tilt"]
+    tilt: configs["camera"]["tilt"],
   };
   const view = new itowns.PlanarView(viewDomElement, extent, {
     placement: placement,
@@ -84,23 +84,23 @@ loadMultipleJSON([
     itowns.View.prototype.addLayer.call(view, c3DTilesLayer);
   });
 
-  view.addLayer(
-    new itowns.ColorLayer(configs["base_maps"][0]["name"], {
-      updateStrategy: {
-        type: itowns.STRATEGY_DICHOTOMY,
-        options: {},
-      },
-      source: new itowns.WMSSource({
-        extent: extent,
-        name: configs["base_maps"][0]["source"]["name"],
-        url: configs["base_maps"][0]["source"]["url"],
-        version: configs["base_maps"][0]["source"]["version"],
-        crs: extent.crs,
-        format: configs["base_maps"][0]["source"]["format"],
-      }),
-      transparent: true,
-    })
-  );
+  // view.addLayer(
+  //   new itowns.ColorLayer(configs["base_maps"]["name"], {
+  //     updateStrategy: {
+  //       type: itowns.STRATEGY_DICHOTOMY,
+  //       options: {},
+  //     },
+  //     source: new itowns.WMSSource({
+  //       extent: extent,
+  //       name: configs["base_maps"]["source"]["name"],
+  //       url: configs["base_maps"]["source"]["url"],
+  //       version: configs["base_maps"]["source"]["version"],
+  //       crs: extent.crs,
+  //       format: configs["base_maps"]["source"]["format"],
+  //     }),
+  //     transparent: true,
+  //   })
+  // );
 
   const isTextureFormat =
     configs["elevation"]["format"] == "image/jpeg" ||
@@ -217,7 +217,32 @@ loadMultipleJSON([
   const img = document.createElement("img");
   logoDiv.appendChild(img);
   img.src = "./assets/img/logo/logo-liris.png";
-  img.classList.add("logos");
+  img.classList.add("logoLiris");
+
+  // Create info and help icons
+  const iconDiv = document.createElement("div");
+  iconDiv.id = "icon-div";
+  document.body.appendChild(iconDiv);
+
+  const buttonInfo = document.createElement("a");
+  buttonInfo.title = "More information";
+  buttonInfo.href = "https://github.com/VCityTeam/UD-Demo-Workspace-GratteCiel";
+  const iconInfo = document.createElement("img");
+  iconInfo.src = "./assets/svg/info-icon.svg";
+  iconInfo.id = "iconInfo";
+  buttonInfo.appendChild(iconInfo);
+
+  const buttonHelp = document.createElement("a");
+  buttonHelp.title = "Help/Tutorial";
+  buttonHelp.href =
+    "https://github.com/VCityTeam/UD-Demo-Workspace-GratteCiel/blob/master/sparql_user_guide.md";
+  const iconHelp = document.createElement("img");
+  iconHelp.src = "./assets/svg/help-icon.svg";
+  iconHelp.id = "iconHelp";
+  buttonHelp.appendChild(iconHelp);
+
+  iconDiv.appendChild(buttonInfo);
+  iconDiv.appendChild(buttonHelp);
 });
 
 /**

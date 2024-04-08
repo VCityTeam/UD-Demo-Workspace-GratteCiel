@@ -22,7 +22,7 @@ body {
   position: absolute;
   padding: 4px;
   font-size: 15px;
-  font-family: 'Segoe UI';
+  font-family: "Segoe UI";
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -65,19 +65,19 @@ body {
 .table_filter {
   position: fixed;
   padding: 1px;
-  background-color: rgba(30,30,30,0.7);
+  background-color: rgba(30, 30, 30, 0.7);
 }
 
 table {
   border: 1px solid white;
   width: 100%;
   height: 100%;
-  margin-top:24px !important;
+  margin-top: 24px !important;
 }
 
 thead {
-  color: #90EE90;
-  margin:auto;
+  color: #90ee90;
+  margin: auto;
   border: 1px solid white !important;
 }
 
@@ -103,7 +103,9 @@ th.aes:after {
   overflow: scroll;
 }
 
-button, input, select {
+button,
+input,
+select {
   width: auto;
   height: auto;
   margin: 2px;
@@ -111,23 +113,49 @@ button, input, select {
   border-radius: 4px;
   background-color: #d1d0de;
   border: none;
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
-.logos {
+.logoLiris {
   height: 60px;
   opacity: 1;
-  margin: 5px 10px 5px 5px;
+  margin: 5px 10px;
 }
 
-#logo-div{
+#logo-div {
   position: fixed;
   display: flex;
   padding: 4px;
   border-radius: 8px;
   bottom: 20px;
   right: 20px;
-  background-color: #8a8e9163;
+  background-color: #ffffff60;
   align-items: center;
   z-index: 5;
+}
+
+#icon-div {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  top: 20px;
+  right: 20px;
+  align-items: center;
+  z-index: 5;
+}
+
+#icon-div img {
+  opacity: 0.9;
+}
+
+#iconInfo {
+  width: 45px;
+  padding: 5px;
+  color: white;
+}
+
+#iconHelp {
+  width: 36px;
+  padding: 5px;
 }

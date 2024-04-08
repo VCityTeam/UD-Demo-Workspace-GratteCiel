@@ -12,6 +12,8 @@ A demonstration for visualizing RDF semantic graphs alongside 3D City models usi
 
 ## Installation
 
+The following sections detail how to setup the demo. In case of crash or error where the demo containers are down, it is possible that the data may need to be [reuploaded](#upload-rdf-store-dataset) to the blazegraph container.
+
 ### Pre-requisites 
 
 * [Install Docker](https://docs.docker.com/engine/install/)
@@ -31,7 +33,7 @@ To configure the demo and the components that support it edit the `.env` file to
 The following sections will describe how to configure this file for each component. 
 
 ### Build Images and run containers
-First, make sure to set the `sparqlModule/url` port in the [./ud-viz-context/assets/config/server/workspace_server.json file](./ud-viz-context/assets/config/server/workspace_server.json) to the same value as the `BLAZEGRAPH_PORT` variable declared in the [.env](./.env) file.
+First, make sure to set the `sparqlModule/url` port in the [ud-viz-context/assets/config/server/workspace_server.json file](./ud-viz-context/assets/config/server/workspace_server.json) to the same value as the `BLAZEGRAPH_PORT` variable declared in the [.env](./.env) file.
 
 Then build the Blazegraph docker image and run its container:
 ```
@@ -39,9 +41,9 @@ docker compose up
 ```
 
 ### Upload RDF-Store Dataset
-To upload files into the RDF-store to be used by the sparqlModule run the [./loadData.sh](./loadData.sh) script with the blazegraph port as a parameter: 
+To upload files into the RDF-store to be used by the sparqlModule run the [./loadData.sh](./loadData.sh) script with the blazegraph SPARQL query endpoint as a parameter: 
 ```bash
-./loadData.sh 9011 > log.html
+./loadData.sh http://127.0.0.1:9011/blazegraph/sparql > log.html
 ```
 
 Now the UD-Viz demo is ready and can be accessed from [localhost:9010](http://localhost:9010)

@@ -11,35 +11,35 @@
       "filepath": "./assets/queries/workspace.rq"
     },
     {
-      "title": "Show Workspace (simplified)",
+      "title": "Show Workspace (without spaces)",
       "formats": {
         "graph": "Graph"
       },
       "filepath": "./assets/queries/workspace-simple.rq"
     },
     {
-      "title": "Show only Versions and VersionTransitions",
+      "title": "Show Workspace (without spaces and scenarios)",
       "formats": {
         "graph": "Graph"
       },
       "filepath": "./assets/queries/scenarios_simple.rq"
     },
     {
-      "title": "Show Scenario 1",
+      "title": "Show only Scenario 1 Versions and Transitions",
       "formats": {
         "graph": "Graph"
       },
       "filepath": "./assets/queries/scenario1.rq"
     },
     {
-      "title": "Show Scenario 2",
+      "title": "Show Scenario 2 Versions and Transitions",
       "formats": {
         "graph": "Graph"
       },
       "filepath": "./assets/queries/scenario2.rq"
     },
     {
-      "title": "Show Transition 2015-2018",
+      "title": "Show Transition 2015 -> 2018 (warning: big query)",
       "formats": {
         "graph": "Graph"
       },
