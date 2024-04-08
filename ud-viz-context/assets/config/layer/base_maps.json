@@ -1,9 +1,17 @@
-{
-  "source": {
+[
+  {
     "url": "https://osm.geo2france.fr/mapcache",
     "name": "bright",
     "version": "1.3.0",
     "format": "image/jpeg",
     "layer_name": "Base_Map"
+  },
+  {
+    "url": "https://imagerie.data.grandlyon.com/geoserver/grandlyon/ows",
+    "name": "ortho_latest",
+    "version": "1.3.0",
+    "format": "image/jpeg",
+    "layer_name": "Base_Map"
   }
-}
+]
+

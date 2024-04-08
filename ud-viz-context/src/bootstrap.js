@@ -84,23 +84,23 @@ loadMultipleJSON([
     itowns.View.prototype.addLayer.call(view, c3DTilesLayer);
   });
 
-  // view.addLayer(
-  //   new itowns.ColorLayer(configs["base_maps"]["name"], {
-  //     updateStrategy: {
-  //       type: itowns.STRATEGY_DICHOTOMY,
-  //       options: {},
-  //     },
-  //     source: new itowns.WMSSource({
-  //       extent: extent,
-  //       name: configs["base_maps"]["source"]["name"],
-  //       url: configs["base_maps"]["source"]["url"],
-  //       version: configs["base_maps"]["source"]["version"],
-  //       crs: extent.crs,
-  //       format: configs["base_maps"]["source"]["format"],
-  //     }),
-  //     transparent: true,
-  //   })
-  // );
+  view.addLayer(
+    new itowns.ColorLayer(configs["base_maps"][1]["layer_name"], {
+      updateStrategy: {
+        type: itowns.STRATEGY_DICHOTOMY,
+        options: {},
+      },
+      source: new itowns.WMSSource({
+        extent: extent,
+        name: configs["base_maps"][1]["name"],
+        url: configs["base_maps"][1]["url"],
+        version: configs["base_maps"][1]["version"],
+        crs: extent.crs,
+        format: configs["base_maps"][1]["format"],
+      }),
+      transparent: true,
+    })
+  );
 
   const isTextureFormat =
     configs["elevation"]["format"] == "image/jpeg" ||
