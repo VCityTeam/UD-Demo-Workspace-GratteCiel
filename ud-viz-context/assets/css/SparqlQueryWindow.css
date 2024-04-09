@@ -116,7 +116,11 @@ select {
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
-.logoLiris {
+#buttonSend {
+  width: inherit;
+}
+
+#logoLiris {
   height: 60px;
   opacity: 1;
   margin: 5px 10px;

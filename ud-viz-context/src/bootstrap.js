@@ -149,6 +149,7 @@ loadMultipleJSON([
   );
 
   sparqlWorkspaceWidgetView.domElement.classList.add("widget_workspace");
+  sparqlWorkspaceWidgetView.domElement.getElementsByTagName("input")[0].id = "buttonSend";
   sparqlWorkspaceWidgetView.dataView.classList.add("data_view");
   sparqlWorkspaceWidgetView.table.filterSelect.classList.add("table_filter");
 
@@ -217,7 +218,7 @@ loadMultipleJSON([
   const img = document.createElement("img");
   logoDiv.appendChild(img);
   img.src = "./assets/img/logo/logo-liris.png";
-  img.classList.add("logoLiris");
+  img.id = "logoLiris";
 
   // Create info and help icons
   const iconDiv = document.createElement("div");
