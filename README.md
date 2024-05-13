@@ -1,6 +1,6 @@
 # UD-Demo-Workspace-GratteCiel
 
-A demonstration for visualizing RDF semantic graphs alongside 3D City models using:
+A demonstration for visualizing RDF semantic graphs using the [Workspace data model](https://hal.science/hal-02454953/file/article.pdf), alongside 3D City models using:
 * [UD-Viz](https://github.com/VCityTeam/UD-Viz) a frontend web application for urban data visualization
   * In particular the SPARQL and Workspace modules from [UD-Viz](https://github.com/VCityTeam/UD-Viz) is used to visualize semantic urban data in the form of RDF
 * [Blazegraph](https://blazegraph.com/) an RDF-Store for storing and serving semantic graph data with a SPARQL REST API
