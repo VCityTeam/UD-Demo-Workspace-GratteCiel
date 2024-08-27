@@ -149,7 +149,8 @@ loadMultipleJSON([
   );
 
   sparqlWorkspaceWidgetView.domElement.classList.add("widget_workspace");
-  sparqlWorkspaceWidgetView.domElement.getElementsByTagName("input")[0].id = "buttonSend";
+  sparqlWorkspaceWidgetView.domElement.getElementsByTagName("input")[0].id =
+    "buttonSend";
   sparqlWorkspaceWidgetView.dataView.classList.add("data_view");
   sparqlWorkspaceWidgetView.table.filterSelect.classList.add("table_filter");
 
